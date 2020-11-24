@@ -91,7 +91,7 @@
         width: 30%;
         top: 0;
         height: 100vh;
-        background: linear-gradient(to left, #3f2b96, #a8c0ff);
+        background: linear-gradient(to left, #05282d, #299d8b);
         z-index: 900
     }
 

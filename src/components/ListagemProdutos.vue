@@ -47,7 +47,7 @@ export default {
                     nome: 'Nome do Produto 1',
                     qtd: 1,
                     preco: '21,89', 
-                    imagem: require('../assets/images/produto-2.jpg'),
+                    imagem: require('../assets/images/take-prod-1.jpeg'),
                     descricao: 'item de maquiagem queridinho, o delineador tem o poder de realçar ainda mais a beleza dos olhos. Versátil, ele pode aparecer na sua make em diferentes formatos, cores e versões, das mais clássicas às mais ousadas e fashionistas.'
                 },
                 {   
@@ -55,7 +55,7 @@ export default {
                     nome: 'Nome do Produto 2', 
                     qtd: 1,
                     preco: '74,95', 
-                    imagem: require('../assets/images/produto-3.jpg'),
+                    imagem: require('../assets/images/take-prod-3.jpeg'),
                     descricao: 'item de maquiagem queridinho, o delineador tem o poder de realçar ainda mais a beleza dos olhos. Versátil, ele pode aparecer na sua make em diferentes formatos, cores e versões, das mais clássicas às mais ousadas e fashionistas.'
                 },
                 {   
@@ -63,7 +63,7 @@ export default {
                     nome: 'Nome do Produto 3', 
                     qtd: 1,
                     preco: '86,70', 
-                    imagem: require('../assets/images/produto-4.jpg'),
+                    imagem: require('../assets/images/take-prod-4.jpeg'),
                     descricao: 'item de maquiagem queridinho, o delineador tem o poder de realçar ainda mais a beleza dos olhos. Versátil, ele pode aparecer na sua make em diferentes formatos, cores e versões, das mais clássicas às mais ousadas e fashionistas.'
                 },
                 {   
@@ -71,7 +71,7 @@ export default {
                     nome: 'Nome do Produto 4', 
                     qtd: 1,
                     preco: '148,90', 
-                    imagem: require('../assets/images/produto-5.jpg'),
+                    imagem: require('../assets/images/take-prod-5.jpeg'),
                     descricao: 'item de maquiagem queridinho, o delineador tem o poder de realçar ainda mais a beleza dos olhos. Versátil, ele pode aparecer na sua make em diferentes formatos, cores e versões, das mais clássicas às mais ousadas e fashionistas.'
                 },
             ]

@@ -34,7 +34,7 @@ export default {
 #app {
   color: #fff;
   font-family: "Roboto", sans-serif;
-  background: linear-gradient(to left, #3f2b96, #a8c0ff);
+  background: linear-gradient(to left, #05282d, #299d8b);
   background-repeat: no-repeat;
 }
 
