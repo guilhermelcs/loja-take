@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/produtos',
     name: 'produtos',
-    component: Produtos
+    component: Produtos,
   },
 
   {
@@ -39,7 +39,7 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router

@@ -69,7 +69,6 @@ export default {
     mounted() {
         if( this.produto !== "[object Object]" ) {
             localStorage.setItem('produto', JSON.stringify(this.produto))
-            console.log(this.produto)
         }
         if( localStorage.getItem('produto') ) {
             this.produto = JSON.parse(localStorage.getItem('produto'))
