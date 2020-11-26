@@ -73,7 +73,9 @@
 
 <script>
 import eventBus from "../eventBus";
+import carrinho from "../mixins/carrinho";
 export default {
+  mixins: [ carrinho ],
   data() {
     return {
       menuIsVisible: false,

@@ -82,7 +82,6 @@ export default {
             const parsed = JSON.stringify(this.produtos)
             localStorage.setItem('produtos', parsed)
             eventBus.$emit('produtoAdicionado', this.produtos, this.updateQuantidadeCarrinho())
-            this.produtos = []
         },
         updateQuantidadeCarrinho() {
             let qtd = 0
