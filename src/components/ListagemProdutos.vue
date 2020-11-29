@@ -13,9 +13,9 @@
                         </v-col>
                     </v-row>
                 </v-col>
-                <!--v-col v-if=" i == repeat && showLinkButton " offset="9" cols="3" class="text-right">
+                <v-col v-if=" i == repeat && showLinkButton " offset="9" cols="3" class="text-right">
                     <LinkButton routeTo="/produtos" buttonName="Ver Mais" />
-                </v-col-->
+                </v-col>
             </v-row>
         </v-row>
 </v-container>
