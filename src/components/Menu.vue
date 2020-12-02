@@ -58,7 +58,7 @@
         <v-row>
           <ul>
             <li v-for="item in menuItems" :key="item">
-                <router-link :to="{ path: '/produtos', query: { categoria: item.toLowerCase() }}">
+                <router-link :to="{ path: '/produtos', query: { categoria: item.toLowerCase() }}" active-class="active" exact>
                     <p @click="checkQueryChange( item )">
                         {{ item }}
                     </p>
@@ -145,5 +145,11 @@ ul li:hover {
 a {
   text-decoration: none;
   color: #fff !important;
+}
+
+a.active {
+  text-decoration: none;
+  color: #fff !important;
+  font-weight: bold;
 }
 </style>
