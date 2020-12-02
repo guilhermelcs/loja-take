@@ -50,7 +50,7 @@ export default {
     },
     computed: {
         produtos() {
-            return this.$store.getters.getProdutos
+            return this.$store.getters.getProdutos  
         },
         produtosFiltrados() {
             return this.$store.getters.getProdutosDaCategoria(this.categoria)
@@ -58,9 +58,10 @@ export default {
         repeatFiltrado() {
             return this.categoria ? 1 : this.repeat
         }
-    },
+    }
 }
 </script>
+
 <style scoped>
     .nome-listagem {
         font-size: 18px;

@@ -24,46 +24,18 @@
 </template>
 
 <script>
-import eventBus from '../eventBus'
 import Produto from '../components/Produto'
 import LinkButton from '../components/LinkButton.vue'
+import carrinho from '../mixins/carrinho'
 export default {
     components: {
         LinkButton,
         Produto,
     },
+    mixins: [ carrinho ],
     data() {
         return {
-            produtos: [],
             produto: this.$route.query.produto
-        }
-    },
-    methods: {
-        adicionarProduto( produto ) {
-            if ( JSON.parse(localStorage.getItem('produtos')) )
-                this.produtos = JSON.parse(localStorage.getItem('produtos'))
-    
-            let incrementarQtd = this.produtos.find( obj => obj.id == produto.id )
-            if( incrementarQtd ) {
-                let index = this.produtos.indexOf(incrementarQtd)
-                this.produtos[index].qtd++
-            }
-            else {
-                this.produtos.push( produto )
-            }
-           
-            const parsed = JSON.stringify(this.produtos)
-            localStorage.setItem('produtos', parsed)
-            eventBus.$emit('produtoAdicionado', this.produtos, this.updateQuantidadeCarrinho())
-            this.produtos = []
-        },
-        updateQuantidadeCarrinho() {
-            let qtd = 0
-            let produtos = JSON.parse(localStorage.getItem('produtos'))
-            for(let item of produtos) {
-                qtd += item.qtd
-            }
-            return qtd
         }
     },
     mounted() {

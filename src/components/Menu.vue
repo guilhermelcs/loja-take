@@ -20,10 +20,10 @@
             ></v-app-bar-nav-icon>
           </v-col>
           <v-col cols="4" class="text-end align-self-center mt-2">
-            <router-link v-if="cartItems" to="/carrinho">
+            <router-link v-if="quantidadeProdutosCarrinho" to="/carrinho">
               <v-badge
-                :content="cartItems"
-                :value="cartItems"
+                :content="quantidadeProdutosCarrinho"
+                :value="quantidadeProdutosCarrinho"
                 color="red"
                 overlap
               >

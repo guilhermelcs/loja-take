@@ -36,7 +36,7 @@
             <v-container>
                 <v-row>
                     <v-col cols="col-12">
-                        <v-row v-if="produtosInicio > 0">
+                        <v-row v-if="quantidadeProdutosCarrinho > 0">
                             <v-col cols="12" class="text-right">
                                 <p class="total">Total: R${{ String( this.getPrecoTotal() ).replace('.',',') }}</p>
                             </v-col>
@@ -73,18 +73,7 @@ export default {
         Modal
     },
     mixins: [carrinho],
-    data() {
-        return {
-            produtos: {},
-            produtosInicio: 0,
-        }
-    },
-    beforeMount() {
-        this.produtosInicio = JSON.parse(localStorage.getItem('produtos')) ? JSON.parse(localStorage.getItem('produtos')).length : 0
-    },
     created() {
-        if ( JSON.parse(localStorage.getItem('produtos')) ) 
-            this.produtos = JSON.parse(localStorage.getItem('produtos'))
         eventBus.$on('produtoRemovido', (produtos)=> {
             if( produtos.length > 1 ) {
                 for( var i = 0; i < produtos.length; i++){ 

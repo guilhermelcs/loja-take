@@ -42,7 +42,8 @@ export default new Vuex.Store({
                 descricao: 'Hidratação é o destaque dos sabonetes, shampoo, e condicionador do Kit. O kit vem com 4 barras naturais, vegetais e feitos à mão elaborados no processo a frio, também conhecido como cold. Caso algum sabonete esteja sem estoque no momento da separação do seu pedido, seu kit poderá conter 1 sabonete repetido ou substituido por outro tipo. Kit em barra: limpa sem agredir e mantém a oleosidade natural da pele. Produto 100% feito à mão, natural e vegetal. Elaborado com as técnicas milenares de saboaria e cosmetologia com manteigas e óleos vegetais, óleos essenciais e argilas.',
                 categoria: 'kits'
             },
-        ]
+        ],
+        produtosNoCarrinho: []
     },
     getters: {
         getProdutos(state) {
@@ -50,6 +51,49 @@ export default new Vuex.Store({
         },
         getProdutosDaCategoria: (state, getters) => (categoria = false) => {
             return categoria ? getters.getProdutos.filter( obj => obj.categoria == categoria ) : getters.getProdutos
+        },
+        getProdutosNoCarrinho(state) {
+            return state.produtosNoCarrinho
+        },
+        getQuantidadeProdutosCarrinho(state, getters) {
+            return getters.getProdutosNoCarrinho.reduce((acumulador, produto) => acumulador + produto.qtd, 0)
+        }
+    },
+    mutations: {
+        settarProdutosNoCarrinho(state) {
+            state.produtosNoCarrinho = JSON.parse(localStorage.getItem('produtos')) ? JSON.parse(localStorage.getItem('produtos')) : []
+        },
+        adicionarProdutoAoCarrinho(state, produto) {
+            state.produtosNoCarrinho.push(produto)
+        },
+        adicionarProdutoExistenteAoCarrinho(state, produto) {
+            state.produtosNoCarrinho = state.produtosNoCarrinho.map( obj => obj.id == produto.id ? obj = produto : obj)
+        },
+        removerProdutoDoCarrinho(state, index ) {
+            state.produtosNoCarrinho.splice(index, 1)
+        },
+    },
+    actions: {
+        adicionarProdutoAoCarrinho({ commit, getters }, produto) {
+            let produtoJaAdicionado = false
+            getters.getProdutosNoCarrinho.map( obj => {
+                if( obj.id == produto.id ) {
+                    produtoJaAdicionado = true
+                    obj.qtd++
+                }
+            })
+            
+            produtoJaAdicionado == false ? commit('adicionarProdutoAoCarrinho', produto) : ''
+        },
+        removerProdutoDoCarrinho({ commit, getters }, produto) {
+            let produtoIndex = null
+            getters.getProdutosNoCarrinho.map( (obj, index) => {
+                if( obj.id == produto.id ) {
+                    obj.qtd > 1 ? obj.qtd-- : produtoIndex = index
+                }
+            })
+            
+            produtoIndex !== null ? commit('removerProdutoDoCarrinho', produtoIndex) : ''
         }
     }
 })

@@ -45,12 +45,12 @@
 </template>
 
 <script>
-import eventBus from '../eventBus'
+import carrinho from '../mixins/carrinho'
 
 export default {
     props: {
         produto: {
-            type: Object,
+            type: [Object, String,],
             required: true
         },
         detailsOnHover: {
@@ -59,37 +59,10 @@ export default {
             required: false
         }
     },
+    mixins: [ carrinho ],
     data() {
         return {
             showDetails: false,
-            produtos: [],
-        }
-    },
-    methods: {
-        adicionarProduto( produto ) {
-            if ( JSON.parse(localStorage.getItem('produtos')) )
-                this.produtos = JSON.parse(localStorage.getItem('produtos'))
-    
-            let incrementarQtd = this.produtos.find( obj => obj.id == produto.id )
-            if( incrementarQtd ) {
-                let index = this.produtos.indexOf(incrementarQtd)
-                this.produtos[index].qtd++
-            }
-            else {
-                this.produtos.push( produto )
-            }
-           
-            const parsed = JSON.stringify(this.produtos)
-            localStorage.setItem('produtos', parsed)
-            eventBus.$emit('produtoAdicionado', this.produtos, this.updateQuantidadeCarrinho())
-        },
-        updateQuantidadeCarrinho() {
-            let qtd = 0
-            let produtos = JSON.parse(localStorage.getItem('produtos'))
-            for(let item of produtos) {
-                qtd += item.qtd
-            }
-            return qtd
         }
     },
 }
