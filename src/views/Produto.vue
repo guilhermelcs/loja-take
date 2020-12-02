@@ -13,13 +13,28 @@
                             <p class="product-price">R${{ produto.preco }}</p>
                         </v-col>
                         <v-col cols="6 mb-5 pb-5 text-right">
-                            <p @click="adicionarProduto(produto)" class="product-add">Adicionar Item <v-icon color="#fff">mdi-plus</v-icon></p>
+                            <p @click="adicionarProduto(produto); snackbar = true" class="product-add">Adicionar Item <v-icon color="#fff">mdi-plus</v-icon></p>
                         </v-col>
                     </v-row>
                     <LinkButton class="mt-5 pt-5" :buttonName="'Ver mais produtos'" :route-to="'/produtos'" :has-icon="false"></LinkButton>
                 </v-col>
             </v-row>
         </v-container>
+        <v-expand-x-transition>
+            <v-snackbar v-model="snackbar" :timeout="timeout">
+                Produto adicionado ao carrinho
+                <template v-slot:action="{ attrs }">
+                    <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                    >
+                    Ok
+                    </v-btn>
+                </template>
+            </v-snackbar>
+        </v-expand-x-transition>
     </div>
 </template>
 
@@ -35,7 +50,9 @@ export default {
     mixins: [ carrinho ],
     data() {
         return {
-            produto: this.$route.query.produto
+            produto: this.$route.query.produto,
+            snackbar: false,
+            timeout: 3500,
         }
     },
     mounted() {

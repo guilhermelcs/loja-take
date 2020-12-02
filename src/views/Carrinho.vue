@@ -19,7 +19,7 @@
                                 <p class="product-qtd my-auto">x {{ produto.qtd }}</p>
                             </v-col>
                             <v-col cols="2" class="text-center">
-                                <p class="product-qtd my-auto">R$ {{ produto.preco }}</p>
+                                <p class="product-qtd my-auto">{{ produto.preco | paraReal }}</p>
                             </v-col>
                             <v-col cols="1">
                                 <v-row>
@@ -38,7 +38,7 @@
                     <v-col cols="col-12">
                         <v-row v-if="quantidadeProdutosCarrinho > 0">
                             <v-col cols="12" class="text-right">
-                                <p class="total">Total: R${{ String( this.getPrecoTotal() ).replace('.',',') }}</p>
+                                <p class="total">Total: {{ this.getPrecoTotal | paraReal }}</p>
                             </v-col>
                             <v-col cols="6" class="text-left">
                                 <LinkButton routeTo="/" :buttonName="'Ver mais produtos'" :hasIcon="false"></LinkButton>
@@ -65,7 +65,6 @@ import LinkButton from '../components/LinkButton'
 import Produto from '../components/Produto'
 import Modal from '../components/Modal'
 import carrinho from '../mixins/carrinho'
-import eventBus from '../eventBus'
 export default {
     components: {
         LinkButton,
@@ -73,37 +72,11 @@ export default {
         Modal
     },
     mixins: [carrinho],
-    created() {
-        eventBus.$on('produtoRemovido', (produtos)=> {
-            if( produtos.length > 1 ) {
-                for( var i = 0; i < produtos.length; i++){ 
-                    if( produtos[i].qtd == 0 ) {
-                        produtos.splice(i, 1); 
-                    }
-                }
-
-                this.produtos = produtos
-                const parsed = JSON.stringify(this.produtos)
-                localStorage.setItem('produtos', parsed)
-            }
-        })
-    },
-    methods: {
+    computed: {
         getPrecoTotal() {
-            if ( JSON.parse(localStorage.getItem('produtos')) )
-                var produtos = JSON.parse(localStorage.getItem('produtos'))
-            let precoTotal = 0
-            for(let item of produtos) {
-                precoTotal += parseFloat( item.preco.replace(',','.') ) * item.qtd
-            }
-            return precoTotal.toFixed(2)
+            return this.$store.getters.getPrecoTotal
         }
     },
-    watch: {
-        produtos() {
-            this.getPrecoTotal()
-        }
-    }
 }
 </script>
 

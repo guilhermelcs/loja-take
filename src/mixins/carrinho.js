@@ -11,6 +11,11 @@ export default {
             return this.$store.getters.getQuantidadeProdutosCarrinho
         }
     },
+    filters: {
+        paraReal(value) {
+            return `R$ ${ String( value.toFixed(2) ).replace('.',',') }`
+        }
+    },
     methods: {
         adicionarProduto( produto ) {
             this.$store.dispatch('adicionarProdutoAoCarrinho', produto)

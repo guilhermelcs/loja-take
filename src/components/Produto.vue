@@ -10,12 +10,12 @@
                         </p>
                         <v-row>
                             <v-col cols="6" class="mb-0 pb-0">
-                                <p class="details-price"> R${{ produto.preco }}</p>
+                                <p class="details-price">{{ produto.preco | paraReal }}</p>
                             </v-col>
                             <v-col cols="6" class="text-right mb-0 pb-0">
                                 <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-icon @click="adicionarProduto( produto )" v-bind="attrs" v-on="on" color="#000">mdi-cart-arrow-down</v-icon>
+                                    <v-icon @click="adicionarProduto( produto ); snackbar = true" v-bind="attrs" v-on="on" color="#000">mdi-cart-arrow-down</v-icon>
                                 </template>
                                 <span>Adicionar Item</span>
                                 </v-tooltip>
@@ -36,11 +36,26 @@
 
         <v-img aspect-ratio="1" :src="produto.imagem" :alt="produto.name">
              <template v-slot:placeholder>
-            <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-            </v-row>
-      </template>    
-        </v-img>    
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                </v-row>
+            </template>    
+        </v-img>
+        <v-expand-x-transition>
+            <v-snackbar v-model="snackbar" :timeout="timeout">
+                Produto adicionado ao carrinho
+                <template v-slot:action="{ attrs }">
+                    <v-btn
+                    color="pink"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                    >
+                    Ok
+                    </v-btn>
+                </template>
+            </v-snackbar>
+        </v-expand-x-transition>
     </div>
 </template>
 
@@ -63,6 +78,8 @@ export default {
     data() {
         return {
             showDetails: false,
+            snackbar: false,
+            timeout: 3500,
         }
     },
 }
